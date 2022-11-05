@@ -186,7 +186,7 @@ async function computeVersion(
   }
 
   const allVersions = await fetchVersions(includePreReleases, repoToken);
-  const validVersions = allVersions.filter(v => semver.valid(v));
+  const validVersions = allVersions.filter(v => semver.valid(v) || v == version);
   const possibleVersions = validVersions.filter(v => v.startsWith(version));
 
   const versionMap = new Map();
