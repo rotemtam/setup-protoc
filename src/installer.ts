@@ -184,11 +184,13 @@ async function computeVersion(
   if (version.endsWith(".x")) {
     version = version.slice(0, version.length - 2);
   }
-
+  console.log('v', version)
   const allVersions = await fetchVersions(includePreReleases, repoToken);
-  const validVersions = allVersions.filter(v => semver.valid(v));
+  console.log('all', allVersions)
+  const validVersions = allVersions.filter(v => semver.valid(v) || v == version);
+  console.log('valid', validVersions)
   const possibleVersions = validVersions.filter(v => v.startsWith(version));
-
+  console.log('possible', possibleVersions)
   const versionMap = new Map();
   possibleVersions.forEach(v => versionMap.set(normalizeVersion(v), v));
 
